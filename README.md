@@ -24,27 +24,27 @@ The container will run impersonated as this user, in order to have read/write ac
 ### Run container in background
 ```
 $ docker run --name nginx --restart=always \
-			  --link=<name of the SickRage Docker container>:sickrage \
-			  --link=<name of the Transmission Docker container>:transmission \
-			  --link=<name of the qBittorrent Docker container>:qbittorrent \ 
-			  -d \
-			  -p <secured SickRage port to provide>:44481 \
-			  -p <secured qBittorrent port to provide>:44482 \
-			  -p <secured Transmission port to provide>:44491 \
-			  -v <path to NGINX configuration dir>:/config \
-			  -v <path to NGINX logs dir>:/logdir \
-			  -v <path to SSL cert and key files>:/ssldir \
-			  -v /etc/localtime:/etc/localtime:ro \
-			  -e "AUTHENTICATION_LOGIN=<login for authentication>" \
-			  -e "AUTHENTICATION_PASSWORD=<password for authentication>" \
-			  -e "SICKRAGE_PORT=<SickRage port to secure (leave empty to disable)>" \
-			  -e "QBITTORRENT_PORT=<qBittorrent port to secure (leave empty to disable)>" \
-			  -e "TRANSMISSION_PORT=<Transmission port to secure (leave empty to disable)>" \
-			  -e "SSL_CERT_FILE=<path to SSL cert file>" \
-			  -e "SSL_KEY_FILE=<path to SSL key file>" \
-              -e "PUID=<user uid>" \
-              -e "PGID=<user gid>" \
-			  ahuh/arm-nginx
+				--link=<name of the SickRage Docker container>:sickrage \
+				--link=<name of the Transmission Docker container>:transmission \
+				--link=<name of the qBittorrent Docker container>:qbittorrent \ 
+				-d \
+				-p <secured SickRage port to provide>:44481 \
+				-p <secured qBittorrent port to provide>:44482 \
+				-p <secured Transmission port to provide>:44491 \
+				-v <path to NGINX configuration dir>:/config \
+				-v <path to NGINX logs dir>:/logdir \
+				-v <path to SSL cert and key files>:/ssldir \
+				-v /etc/localtime:/etc/localtime:ro \
+				-e "AUTHENTICATION_LOGIN=<login for authentication>" \
+				-e "AUTHENTICATION_PASSWORD=<password for authentication>" \
+				-e "SICKRAGE_PORT=<SickRage port to secure (leave empty to disable)>" \
+				-e "QBITTORRENT_PORT=<qBittorrent port to secure (leave empty to disable)>" \
+				-e "TRANSMISSION_PORT=<Transmission port to secure (leave empty to disable)>" \
+				-e "SSL_CERT_FILE=<path to SSL cert file>" \
+				-e "SSL_KEY_FILE=<path to SSL key file>" \
+				-e "PUID=<user uid>" \
+				-e "PGID=<user gid>" \
+				ahuh/arm-nginx
 ```
 or
 ```
