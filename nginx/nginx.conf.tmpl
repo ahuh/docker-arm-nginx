@@ -1,0 +1,103 @@
+daemon				off;
+user				${RUN_AS} ${RUN_AS};
+
+error_log			/logdir/error.log;
+error_log			/logdir/error.log	notice;
+error_log			/logdir/error.log	info;
+
+events {
+	worker_connections	1024;
+}
+
+http {
+    log_format	main	'$remote_addr - $remote_user [$time_local] "$request" '
+						'$status $body_bytes_sent "$http_referer" '
+						'"$http_user_agent" "$http_x_forwarded_for"';
+	access_log			/logdir/access.log		main;
+	
+	server_tokens		off;
+
+	# =============================================================================
+	# Securing SickRage WebUI
+	${CS}server {
+	${CS}	listen	44481;
+	${CS}	
+	${CS}	# SSL configuration
+	${CS}	ssl on;
+	${CS}	ssl_certificate		${SSL_CERT_FILE};
+	${CS}	ssl_certificate_key	${SSL_KEY_FILE};
+	${CS}	
+	${CS}	location / {
+	${CS}		# Authentication
+	${CS}		auth_basic				"Restricted";
+	${CS}		auth_basic_user_file	${NGINX_HTPASSWD_FILE};
+	${CS}	
+	${CS}		# Proxy configuration
+	${CS}		proxy_pass 			http://sickrage:${SICKRAGE_PORT};
+	${CS}		proxy_set_header	Host 				$http_host;
+	${CS}		proxy_set_header	X-Real-IP			$remote_addr;
+	${CS}		proxy_set_header	X-Forwarded-For		$proxy_add_x_forwarded_for;
+	${CS}		proxy_set_header	X-Forwarded-Proto	$scheme;
+	${CS}		
+	${CS}		# HTTP 1.1 support
+	${CS}		proxy_http_version 			1.1;
+	${CS}		proxy_set_header Connection	"";
+	${CS}	}
+	${CS}}
+	
+	# =============================================================================
+	# Securing qBittorrent WebUI
+	${CQ}server {
+	${CQ}	listen	44482;
+	${CQ}	
+	${CQ}	# SSL configuration
+	${CQ}	ssl on;
+	${CQ}	ssl_certificate		${SSL_CERT_FILE};
+	${CQ}	ssl_certificate_key	${SSL_KEY_FILE};
+	${CQ}	
+	${CQ}	location / {
+	${CQ}		# Authentication
+	${CQ}		auth_basic				"Restricted";
+	${CQ}		auth_basic_user_file	${NGINX_HTPASSWD_FILE};
+	${CQ}		
+	${CQ}		# Proxy configuration
+	${CQ}		proxy_pass 			http://qbittorrent:${QBITTORRENT_PORT};
+	${CQ}		proxy_set_header	Host 				$http_host;
+	${CQ}		proxy_set_header	X-Real-IP			$remote_addr;
+	${CQ}		proxy_set_header	X-Forwarded-For		$proxy_add_x_forwarded_for;
+	${CQ}		proxy_set_header	X-Forwarded-Proto	$scheme;
+	${CQ}		
+	${CQ}		# HTTP 1.1 support
+	${CQ}		proxy_http_version 			1.1;
+	${CQ}		proxy_set_header Connection	"";
+	${CQ}	}
+	${CQ}}
+	
+	# =============================================================================
+	# Securing Transmission WebUI
+	${CT}server {
+	${CT}	listen	44491;
+	${CT}	
+	${CT}	# SSL configuration
+	${CT}	ssl on;
+	${CT}	ssl_certificate		${SSL_CERT_FILE};
+	${CT}	ssl_certificate_key	${SSL_KEY_FILE};
+	${CT}	
+	${CT}	location / {
+	${CT}		# Authentication
+	${CT}		auth_basic				"Restricted";
+	${CT}		auth_basic_user_file	${NGINX_HTPASSWD_FILE};
+	${CT}		
+	${CT}		# Proxy configuration
+	${CT}		proxy_pass 			http://transmission:${TRANSMISSION_PORT};
+	${CT}		proxy_set_header	Host 				$http_host;
+	${CT}		proxy_set_header	X-Real-IP			$remote_addr;
+	${CT}		proxy_set_header	X-Forwarded-For		$proxy_add_x_forwarded_for;
+	${CT}		proxy_set_header	X-Forwarded-Proto	$scheme;
+	${CT}		
+	${CT}		# HTTP 1.1 support
+	${CT}		proxy_http_version 			1.1;
+	${CT}		proxy_set_header Connection	"";
+	${CT}	}
+	${CT}}
+}
