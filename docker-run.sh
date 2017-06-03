@@ -23,15 +23,18 @@ export L_SICKRAGE=sickrage
 export L_TRANSMISSION=transmission
 export L_QBITTORRENT=qbittorrent
 
+#export P_SSL_SICKRAGE_PORT=
 export P_SSL_SICKRAGE_PORT=44481
+#export P_SSL_QBITTORRENT_PORT=
 export P_SSL_QBITTORRENT_PORT=44482
+#export P_SSL_TRANSMISSION_PORT=
 export P_SSL_TRANSMISSION_PORT=44491
 export E_SICKRAGE_PORT=8081
 export E_QBITTORRENT_PORT=8082
 export E_TRANSMISSION_PORT=9091
 
-export E_SSL_CERT_FILE=/shares/P2P/tools/ssl/ahuh.crt
-export E_SSL_KEY_FILE=/shares/P2P/tools/ssl/ahuh.key
+export E_SSL_CERT_FILE=ahuh.crt
+export E_SSL_KEY_FILE=ahuh.key
 
 export E_PUID=500
 export E_PGID=1000

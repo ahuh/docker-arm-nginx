@@ -4,8 +4,15 @@ Docker image (ARMv7) hosting a NGINX server to secure SickRage, Transmission and
 This project is based on an existing project, modified to work on ARMv7 WD My Cloud EX2 Ultra NAS.<br />
 See GitHub repository: https://github.com/haugene/docker-transmission-openvpn<br />
 <br />
-This image is part of a Docker images collection, intended to build a full-featured seedbox.<br />
-This image is compatible with WD My Cloud EX2 Ultra NAS (Docker v1.7.0).<br />
+This image is part of a Docker images collection, intended to build a full-featured seedbox, and compatible with WD My Cloud EX2 Ultra NAS (Docker v1.7.0):
+
+Docker Image | GitHub repository | Docker Hub repository
+------------ | ----------------- | -----------------
+Docker image (ARMv7) hosting a Transmission torrent client with WebUI while connecting to OpenVPN | https://github.com/ahuh/docker-arm-transmissionvpn | https://hub.docker.com/r/ahuh/arm-transmissionvpn
+Docker image (ARMv7) hosting a qBittorrent client with WebUI while connecting to OpenVPN | https://github.com/ahuh/docker-arm-qbittorrentvpn | https://hub.docker.com/r/ahuh/arm-qbittorrentvpn
+Docker image (ARMv7) hosting SubZero with MKVMerge (subtitle autodownloader for TV shows) | https://github.com/ahuh/docker-arm-subzero | https://hub.docker.com/r/ahuh/arm-subzero
+Docker image (ARMv7) hosting a SickRage server with WebUI | https://github.com/ahuh/docker-arm-sickrage | https://hub.docker.com/r/ahuh/arm-sickrage
+Docker image (ARMv7) hosting a NGINX server to secure SickRage, Transmission and qBittorrent | https://github.com/ahuh/docker-arm-nginx | https://hub.docker.com/r/ahuh/arm-nginx
 
 ## Installation
 
@@ -40,8 +47,8 @@ $ docker run --name nginx --restart=always \
 		-e "SICKRAGE_PORT=<SickRage port to secure (leave empty to disable)>" \
 		-e "QBITTORRENT_PORT=<qBittorrent port to secure (leave empty to disable)>" \
 		-e "TRANSMISSION_PORT=<Transmission port to secure (leave empty to disable)>" \
-		-e "SSL_CERT_FILE=<path to SSL cert file>" \
-		-e "SSL_KEY_FILE=<path to SSL key file>" \
+		-e "SSL_CERT_FILE=<SSL cert file name>" \
+		-e "SSL_KEY_FILE=<SSL key file name>" \
 		-e "PUID=<user uid>" \
 		-e "PGID=<user gid>" \
 		ahuh/arm-nginx

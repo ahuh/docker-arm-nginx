@@ -1,9 +1,7 @@
 daemon				off;
 user				${RUN_AS} ${RUN_AS};
 
-error_log			/logdir/error.log;
-error_log			/logdir/error.log	notice;
-error_log			/logdir/error.log	info;
+error_log			${NGINX_LOG_ERROR_FILE}	warn;
 
 events {
 	worker_connections	1024;
@@ -13,7 +11,7 @@ http {
     log_format	main	'$remote_addr - $remote_user [$time_local] "$request" '
 						'$status $body_bytes_sent "$http_referer" '
 						'"$http_user_agent" "$http_x_forwarded_for"';
-	access_log			/logdir/access.log		main;
+	access_log			${NGINX_LOG_ACCESS_FILE}		main;
 	
 	server_tokens		off;
 
@@ -24,8 +22,8 @@ http {
 	${CS}	
 	${CS}	# SSL configuration
 	${CS}	ssl on;
-	${CS}	ssl_certificate		${SSL_CERT_FILE};
-	${CS}	ssl_certificate_key	${SSL_KEY_FILE};
+	${CS}	ssl_certificate		/ssldir/${SSL_CERT_FILE};
+	${CS}	ssl_certificate_key	/ssldir/${SSL_KEY_FILE};
 	${CS}	
 	${CS}	location / {
 	${CS}		# Authentication
@@ -52,13 +50,11 @@ http {
 	${CQ}	
 	${CQ}	# SSL configuration
 	${CQ}	ssl on;
-	${CQ}	ssl_certificate		${SSL_CERT_FILE};
-	${CQ}	ssl_certificate_key	${SSL_KEY_FILE};
+	${CQ}	ssl_certificate		/ssldir/${SSL_CERT_FILE};
+	${CQ}	ssl_certificate_key	/ssldir/${SSL_KEY_FILE};
 	${CQ}	
 	${CQ}	location / {
-	${CQ}		# Authentication
-	${CQ}		auth_basic				"Restricted";
-	${CQ}		auth_basic_user_file	${NGINX_HTPASSWD_FILE};
+	${CQ}		# No authentication (already provided by qBittorrent WebUI)
 	${CQ}		
 	${CQ}		# Proxy configuration
 	${CQ}		proxy_pass 			http://qbittorrent:${QBITTORRENT_PORT};
@@ -80,8 +76,8 @@ http {
 	${CT}	
 	${CT}	# SSL configuration
 	${CT}	ssl on;
-	${CT}	ssl_certificate		${SSL_CERT_FILE};
-	${CT}	ssl_certificate_key	${SSL_KEY_FILE};
+	${CT}	ssl_certificate		/ssldir/${SSL_CERT_FILE};
+	${CT}	ssl_certificate_key	/ssldir/${SSL_KEY_FILE};
 	${CT}	
 	${CT}	location / {
 	${CT}		# Authentication

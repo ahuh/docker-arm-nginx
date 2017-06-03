@@ -1,6 +1,6 @@
-#!/bin/sh
+#! /bin/bash
 
-. /etc/sickrage/userSetup.sh
+. /etc/nginx/userSetup.sh
 
 echo "PREPARING NGINX CONFIG"
 . /etc/nginx/prepareConfig.sh

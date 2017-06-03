@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 
 # Replace ${XXX} tokens by environment vars
 template(){
@@ -12,5 +12,5 @@ template(){
     # Finally, escape embedded double quotes to preserve them.
     lineEscaped=${lineEscaped//\"/\\\"}
     eval "printf '%s\n' \"$lineEscaped\"" | tr '\1\2\3\4' '`([$'
-  done
+  done < ${1}
 }

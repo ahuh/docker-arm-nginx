@@ -1,4 +1,4 @@
-#!/bin/sh
+#! /bin/bash
 
 # More/less taken from https://github.com/linuxserver/docker-baseimage-alpine/blob/3eb7146a55b7bff547905e0d3f71a26036448ae6/root/etc/cont-init.d/10-adduser
 
@@ -10,8 +10,7 @@ if [ -n "$PUID" ] && [ ! "$(id -u root)" -eq "$PUID" ]; then
     if [ ! "$(id -g ${RUN_AS})" -eq "$PGID" ]; then groupmod -o -g "$PGID" ${RUN_AS} ; fi
 
     echo "Setting owner for nginx paths to ${PUID}:${PGID}"
-    chown -R ${RUN_AS}:${RUN_AS} \
-		/config \
+    chown -R ${RUN_AS}:${RUN_AS} /config \
 		/logdir \
 		/ssldir
 fi
