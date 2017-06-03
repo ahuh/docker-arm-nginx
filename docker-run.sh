@@ -19,17 +19,19 @@ export V_CONFIG=/shares/P2P/tools/nginx
 export V_LOG_DIR=/shares/P2P/tools/nginx/logs
 export V_SSL_DIR=/shares/P2P/tools/ssl
 
-# Comment link var to remove docker link for this container and to remove NGINX configuration for this web app
+# Comment link var to remove docker link for this container
 export L_SICKRAGE=" --link=sickrage:sickrage"
 export L_TRANSMISSION=" --link=transmission:transmission"
-export L_QBITTORRENT=" --link=qbittorrent:qbittorrent"
+#export L_QBITTORRENT=" --link=qbittorrent:qbittorrent"
+
+# Comment source port var to remove NGINX configuration for this web app
+export E_SICKRAGE_PORT=8081
+export E_TRANSMISSION_PORT=9091
+#export E_QBITTORRENT_PORT=8082
  
 export P_SSL_SICKRAGE_PORT=44481
 export P_SSL_QBITTORRENT_PORT=44482
 export P_SSL_TRANSMISSION_PORT=44491
-export E_SICKRAGE_PORT=8081
-export E_QBITTORRENT_PORT=8082
-export E_TRANSMISSION_PORT=9091
 
 export E_SSL_CERT_FILE=ahuh.crt
 export E_SSL_KEY_FILE=ahuh.key

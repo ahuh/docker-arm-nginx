@@ -24,15 +24,15 @@ NGINX_CONFIG_FILE=/config/nginx.conf
 CS=
 CT=
 CQ=
-if [[ ! "${L_SICKRAGE}" ]]; then
+if [[ ! "${SICKRAGE_PORT}" ]]; then
 	# No SickRage port specified in env var: disable SickRage in NGINX
 	CS=#
 fi
-if [[ ! "${L_TRANSMISSION}" ]]; then
+if [[ ! "${TRANSMISSION_PORT}" ]]; then
 	# No Transmission port specified in env var: disable Transmission in NGINX
 	CT=#
 fi
-if [[ ! "${L_QBITTORRENT}" ]]; then
+if [[ ! "${QBITTORRENT_PORT}" ]]; then
 	# No qBittorrent port specified in env var: disable qBittorrent in NGINX
 	CQ=#
 fi
