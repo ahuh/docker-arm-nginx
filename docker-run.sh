@@ -16,17 +16,13 @@
 # export E_AUTHENTICATION_PASSWORD=XXX
 . docker-params.sh
 
+export DOCKERHOST=$(ip route | grep docker | awk '{print $NF}')
 export DNS_1=8.8.8.8
 export DNS_2=8.8.4.4
 
 export V_CONFIG=/shares/P2P/tools/nginx
 export V_LOG_DIR=/shares/P2P/tools/nginx/logs
 export V_SSL_DIR=/shares/P2P/tools/ssl
-
-# Comment link var to remove docker link for this container
-export L_SICKRAGE=" --link=sickrage:sickrage"
-export L_TRANSMISSION=" --link=transquidvpn:transmission"
-#export L_QBITTORRENT=" --link=qbittorrent:qbittorrent"
 
 export P_SSL_SICKRAGE_PORT=44481
 export P_SSL_QBITTORRENT_PORT=44482
@@ -107,4 +103,4 @@ fi
 # Custom commands
 
 echo "Run container: ${CONTAINER_NAME}"
-docker run --name ${CONTAINER_NAME} --restart=always --dns=${DNS_1} --dns=${DNS_2}${L_SICKRAGE}${L_TRANSMISSION}${L_QBITTORRENT} -d -p ${P_SSL_SICKRAGE_PORT}:44481 -p ${P_SSL_QBITTORRENT_PORT}:44482 -p ${P_SSL_TRANSMISSION_PORT}:44491 -v ${V_CONFIG}:/config -v ${V_LOG_DIR}:/logdir -v ${V_SSL_DIR}:/ssldir -v /etc/localtime:/etc/localtime:ro -e "AUTHENTICATION_LOGIN=${E_AUTHENTICATION_LOGIN}" -e "AUTHENTICATION_PASSWORD=${E_AUTHENTICATION_PASSWORD}" -e "SICKRAGE_PORT=${E_SICKRAGE_PORT}" -e "QBITTORRENT_PORT=${E_QBITTORRENT_PORT}" -e "TRANSMISSION_PORT=${E_TRANSMISSION_PORT}" -e "SSL_CERT_FILE=${E_SSL_CERT_FILE}" -e "SSL_KEY_FILE=${E_SSL_KEY_FILE}" -e "PUID=${E_PUID}" -e "PGID=${E_PGID}" ${IMAGE_NAME}
+docker run --name ${CONTAINER_NAME} --restart=always --add-host=dockerhost:${DOCKERHOST} --dns=${DNS_1} --dns=${DNS_2} -d -p ${P_SSL_SICKRAGE_PORT}:44481 -p ${P_SSL_QBITTORRENT_PORT}:44482 -p ${P_SSL_TRANSMISSION_PORT}:44491 -v ${V_CONFIG}:/config -v ${V_LOG_DIR}:/logdir -v ${V_SSL_DIR}:/ssldir -v /etc/localtime:/etc/localtime:ro -e "AUTHENTICATION_LOGIN=${E_AUTHENTICATION_LOGIN}" -e "AUTHENTICATION_PASSWORD=${E_AUTHENTICATION_PASSWORD}" -e "SICKRAGE_PORT=${E_SICKRAGE_PORT}" -e "QBITTORRENT_PORT=${E_QBITTORRENT_PORT}" -e "TRANSMISSION_PORT=${E_TRANSMISSION_PORT}" -e "SSL_CERT_FILE=${E_SSL_CERT_FILE}" -e "SSL_KEY_FILE=${E_SSL_KEY_FILE}" -e "PUID=${E_PUID}" -e "PGID=${E_PGID}" ${IMAGE_NAME}

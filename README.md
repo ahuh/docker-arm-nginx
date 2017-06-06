@@ -31,10 +31,8 @@ The container will run impersonated as this user, in order to have read/write ac
 ### Run container in background
 ```
 $ docker run --name nginx --restart=always \
+		--add-host=dockerhost:<docker host IP> \
 		--dns=<ip of dns #1> --dns=<ip of dns #2> \
-		--link=<name of the SickRage Docker container>:sickrage \
-		--link=<name of the Transmission Docker container>:transmission \
-		--link=<name of the qBittorrent Docker container>:qbittorrent \ 
 		-d \
 		-p <secured SickRage port to provide>:44481 \
 		-p <secured qBittorrent port to provide>:44482 \

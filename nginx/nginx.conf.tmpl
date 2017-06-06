@@ -31,7 +31,7 @@ http {
 	${CS}		auth_basic_user_file	${NGINX_HTPASSWD_FILE};
 	${CS}	
 	${CS}		# Proxy configuration
-	${CS}		proxy_pass 			http://sickrage:${SICKRAGE_PORT};
+	${CS}		proxy_pass 			http://dockerhost:${SICKRAGE_PORT};
 	${CS}		proxy_set_header	Host 				$http_host;
 	${CS}		proxy_set_header	X-Real-IP			$remote_addr;
 	${CS}		proxy_set_header	X-Forwarded-For		$proxy_add_x_forwarded_for;
@@ -57,7 +57,7 @@ http {
 	${CQ}		# No authentication (already provided by qBittorrent WebUI)
 	${CQ}		
 	${CQ}		# Proxy configuration
-	${CQ}		proxy_pass 			http://qbittorrent:${QBITTORRENT_PORT};
+	${CQ}		proxy_pass 			http://dockerhost:${QBITTORRENT_PORT};
 	${CQ}		proxy_set_header	Host 				$http_host;
 	${CQ}		proxy_set_header	X-Real-IP			$remote_addr;
 	${CQ}		proxy_set_header	X-Forwarded-For		$proxy_add_x_forwarded_for;
@@ -85,7 +85,7 @@ http {
 	${CT}		auth_basic_user_file	${NGINX_HTPASSWD_FILE};
 	${CT}		
 	${CT}		# Proxy configuration
-	${CT}		proxy_pass 			http://transmission:${TRANSMISSION_PORT};
+	${CT}		proxy_pass 			http://dockerhost:${TRANSMISSION_PORT};
 	${CT}		proxy_set_header	Host 				$http_host;
 	${CT}		proxy_set_header	X-Real-IP			$remote_addr;
 	${CT}		proxy_set_header	X-Forwarded-For		$proxy_add_x_forwarded_for;
