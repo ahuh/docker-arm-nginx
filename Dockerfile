@@ -62,7 +62,7 @@ RUN chmod +x /etc/common/*.sh \
     && chmod +x /etc/nginx/*.sh
 
 # Expose ports
-EXPOSE 44482 44481 44491
+EXPOSE 44481 44482 44483 44491
 
 # Launch NGINX at container start
 CMD ["dumb-init", "/etc/nginx/start.sh"]

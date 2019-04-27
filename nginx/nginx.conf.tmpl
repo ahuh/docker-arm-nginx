@@ -68,6 +68,34 @@ http {
 	${CQ}		proxy_set_header Connection	"";
 	${CQ}	}
 	${CQ}}
+
+	# =============================================================================
+	# Securing Jackett WebUI
+	${CS}server {
+	${CS}	listen	44483;
+	${CS}	
+	${CS}	# SSL configuration
+	${CS}	ssl on;
+	${CS}	ssl_certificate		/ssldir/${SSL_CERT_FILE};
+	${CS}	ssl_certificate_key	/ssldir/${SSL_KEY_FILE};
+	${CS}	
+	${CS}	location / {
+	${CS}		# Authentication
+	${CS}		auth_basic				"Restricted";
+	${CS}		auth_basic_user_file	${NGINX_HTPASSWD_FILE};
+	${CS}	
+	${CS}		# Proxy configuration
+	${CS}		proxy_pass 			http://dockerhost:${JACKETT_PORT};
+	${CS}		proxy_set_header	Host 				$http_host;
+	${CS}		proxy_set_header	X-Real-IP			$remote_addr;
+	${CS}		proxy_set_header	X-Forwarded-For		$proxy_add_x_forwarded_for;
+	${CS}		proxy_set_header	X-Forwarded-Proto	$scheme;
+	${CS}		
+	${CS}		# HTTP 1.1 support
+	${CS}		proxy_http_version 			1.1;
+	${CS}		proxy_set_header Connection	"";
+	${CS}	}
+	${CS}}
 	
 	# =============================================================================
 	# Securing Transmission WebUI

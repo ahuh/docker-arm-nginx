@@ -1,5 +1,5 @@
 # Docker ARM NGINX
-Docker image (ARMv7) hosting a NGINX server to secure SickChill, Transmission and qBittorrent. For each application, an HTTPS proxy is provided, with basic authentication (login / password).<br />
+Docker image (ARMv7) hosting a NGINX server to secure SickChill, Transmission, qBittorrent and Jackett. For each application, an HTTPS proxy is provided, with basic authentication (login / password).<br />
 <br />
 This project is based on an existing project, modified to work on ARMv7 WD My Cloud EX2 Ultra NAS.<br />
 See GitHub repository: https://github.com/haugene/docker-transmission-openvpn<br />
@@ -37,6 +37,7 @@ $ docker run --name nginx --restart=always \
 		-d \
 		-p <secured SickChill port to provide>:44481 \
 		-p <secured qBittorrent port to provide>:44482 \
+		-p <secured Jackett port to provide>:44483 \
 		-p <secured Transmission port to provide>:44491 \
 		-v <path to NGINX configuration dir>:/config \
 		-v <path to NGINX logs dir>:/logdir \
@@ -46,6 +47,7 @@ $ docker run --name nginx --restart=always \
 		-e "AUTHENTICATION_PASSWORD=<password for authentication>" \
 		-e "SICKCHILL_PORT=<SickChill port to secure (leave empty to disable)>" \
 		-e "QBITTORRENT_PORT=<qBittorrent port to secure (leave empty to disable)>" \
+		-e "JACKETT_PORT=<Jackett port to secure (leave empty to disable)>" \
 		-e "TRANSMISSION_PORT=<Transmission port to secure (leave empty to disable)>" \
 		-e "SSL_CERT_FILE=<SSL cert file name>" \
 		-e "SSL_KEY_FILE=<SSL key file name>" \
