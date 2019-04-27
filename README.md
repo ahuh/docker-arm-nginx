@@ -1,5 +1,5 @@
 # Docker ARM NGINX
-Docker image (ARMv7) hosting a NGINX server to secure SickRage, Transmission and qBittorrent. For each application, an HTTPS proxy is provided, with basic authentication (login / password).<br />
+Docker image (ARMv7) hosting a NGINX server to secure SickChill, Transmission and qBittorrent. For each application, an HTTPS proxy is provided, with basic authentication (login / password).<br />
 <br />
 This project is based on an existing project, modified to work on ARMv7 WD My Cloud EX2 Ultra NAS.<br />
 See GitHub repository: https://github.com/haugene/docker-transmission-openvpn<br />
@@ -13,7 +13,7 @@ Docker image (ARMv7) hosting a qBittorrent client with WebUI while connecting to
 Docker image (ARMv7) hosting SubZero with MKVMerge (subtitle autodownloader for TV shows) | https://github.com/ahuh/docker-arm-subzero | https://hub.docker.com/r/ahuh/arm-subzero
 Docker image (ARMv7) hosting a SickChill server with WebUI | https://github.com/ahuh/docker-arm-sickchill | https://hub.docker.com/r/ahuh/arm-sickchill
 Docker image (ARMv7) hosting a Jackett server with WebUI | https://github.com/ahuh/docker-arm-jackett | https://hub.docker.com/r/ahuh/arm-jackett
-Docker image (ARMv7) hosting a NGINX server to secure SickRage, Transmission and qBittorrent | https://github.com/ahuh/docker-arm-nginx | https://hub.docker.com/r/ahuh/arm-nginx
+Docker image (ARMv7) hosting a NGINX server to secure SickChill, Transmission and qBittorrent | https://github.com/ahuh/docker-arm-nginx | https://hub.docker.com/r/ahuh/arm-nginx
 
 ## Installation
 
@@ -35,7 +35,7 @@ $ docker run --name nginx --restart=always \
 		--add-host=dockerhost:<docker host IP> \
 		--dns=<ip of dns #1> --dns=<ip of dns #2> \
 		-d \
-		-p <secured SickRage port to provide>:44481 \
+		-p <secured SickChill port to provide>:44481 \
 		-p <secured qBittorrent port to provide>:44482 \
 		-p <secured Transmission port to provide>:44491 \
 		-v <path to NGINX configuration dir>:/config \
@@ -44,7 +44,7 @@ $ docker run --name nginx --restart=always \
 		-v /etc/localtime:/etc/localtime:ro \
 		-e "AUTHENTICATION_LOGIN=<login for authentication>" \
 		-e "AUTHENTICATION_PASSWORD=<password for authentication>" \
-		-e "SICKRAGE_PORT=<SickRage port to secure (leave empty to disable)>" \
+		-e "SICKCHILL_PORT=<SickChill port to secure (leave empty to disable)>" \
 		-e "QBITTORRENT_PORT=<qBittorrent port to secure (leave empty to disable)>" \
 		-e "TRANSMISSION_PORT=<Transmission port to secure (leave empty to disable)>" \
 		-e "SSL_CERT_FILE=<SSL cert file name>" \

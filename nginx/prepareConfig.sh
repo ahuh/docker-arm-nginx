@@ -24,8 +24,8 @@ NGINX_CONFIG_FILE=/config/nginx.conf
 CS=
 CT=
 CQ=
-if [[ ! "${SICKRAGE_PORT}" ]]; then
-	# No SickRage port specified in env var: disable SickRage in NGINX
+if [[ ! "${SICKCHILL_PORT}" ]]; then
+	# No SickChill port specified in env var: disable SickChill in NGINX
 	CS=#
 fi
 if [[ ! "${TRANSMISSION_PORT}" ]]; then

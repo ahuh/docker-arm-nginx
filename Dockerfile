@@ -16,7 +16,7 @@ VOLUME /userhome
 
 # Set environment variables
 # - Set WebUIs ports, authentication login and password, certificates for enabling HTTPS, and execution user (PUID/PGID)
-ENV SICKRAGE_PORT=\
+ENV SICKCHILL_PORT=\
 	TRANSMISSION_PORT=\
 	QBITTORRENT_PORT=\
 	AUTHENTICATION_LOGIN=\
